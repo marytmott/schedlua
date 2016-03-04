@@ -12,13 +12,21 @@ maintains a 'readyToRun' list of tasks.  Is supports a "scheduleTask()"
 function, and not much else.  The scheduler itself does not get involved
 in the actual creation of tasks.  It is assumed that they are created
 from a different API, and simply handed to the scheduler when scheduling
+<<<<<<< HEAD
 operations need to occur with.  The basis scheduler is a simple FIFO scheduler,
+=======
+operations need to occur with.  The basis scheduler is a simple FIFO scheduler, 
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 which gives no weight to one task over another.
 
 kernel.lua
 ==========
 Although it is possible to program against the scheduler/task combo, you're
+<<<<<<< HEAD
 actually better off not doing it this way because it is so rough.  Instead, an application should use the kernel module
+=======
+actually better off not doing it this way because it is so rough.  Instead, an application should use the kernel module 
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 local Kernel = require("kernel")
 
 
@@ -26,8 +34,13 @@ functor.lua
 ===========
 
 	A functor is a function that can stand in for another function.
+<<<<<<< HEAD
 	It is somewhat of an object because it retains a certain amount
 	of state.  In this case, it retains the target object, if there is
+=======
+	It is somewhat of an object because it retains a certain amount 
+	of state.  In this case, it retains the target object, if there is 
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 	any.
 
 	This is fairly useful when you need to call a function on an object
@@ -47,7 +60,11 @@ functor.lua
 	The object instance is passed into the function as the 'self' parameter
 	before the other parameters.
 
+<<<<<<< HEAD
 	This is easy enough, but when you're storing the function in a
+=======
+	This is easy enough, but when you're storing the function in a 
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 	table, for later call, you have a problem because you need to store
 	the object instance as well, somewhere.
 
@@ -61,7 +78,11 @@ functor.lua
 		routine2 = Functor(obj.func1, someobj2);
 		routine3 = Functor(obj.func2, someobj);
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 	Then use it as:
 	  funcs.routine1(params);
 	  funcs.routine3(params);
@@ -70,6 +91,7 @@ functor.lua
 
 References:
 * Relevant Blog Entries
+<<<<<<< HEAD
 ** https://williamaadams.wordpress.com/?s=schedlua
 =======
 # lua-heaps
@@ -106,3 +128,6 @@ You can provide a comparison function to `heap:new`, which will be passed the ke
 
 
 The heaps tested against Lua 5.1-5.3 and LuaJIT.
+=======
+** https://williamaadams.wordpress.com/?s=schedlua
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c

@@ -18,7 +18,11 @@ local Alarm = require("schedlua.alarm")
 	are represented by Lua coroutines.
 
 	The scheduler works by being the main routine which is running
+<<<<<<< HEAD
 	in the application.  When work is to be done, it is encapsulated in
+=======
+	in the application.  When work is to be done, it is encapsulated in
+>>>>>>> 57393881e829c5beac33ea7d3e69295203e0e85c
 	the form of a task object.  The scheduler relies upon that task object
 	to call a form of 'yield' at some point, at which time it will receive
 	the main thread of execution, and will pick the next task out of the ready

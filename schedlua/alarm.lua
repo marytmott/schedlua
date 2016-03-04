@@ -41,7 +41,7 @@ local function compareDueTime(task1, task2)
 	return false;
 end
 
----- ****
+
 function Alarm.waitUntilTime(self, atime)
 	-- create a signal
 	local taskID = self.Kernel:getCurrentTaskID();
@@ -106,7 +106,6 @@ function Alarm.watchdog(self)
 			else
 				break;
 			end
-		end
 		self.Kernel:yield();
 	end
 end
