@@ -187,8 +187,8 @@ end
 
 -- function to send out "tick"
 
-function ()
-Alarm:periodic(FUNCTION, 1000)
+function tick()
+	Alarm:periodic(FUNCTION, 1000)
 
 
 
