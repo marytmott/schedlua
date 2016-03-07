@@ -52,7 +52,10 @@ function Task.setParams(self, params)
 end
 
 function Task.resume(self)
---print("Task, RESUMING: ", unpack(self.params));
+	-- print("Task, RESUMING: ", unpack(self.params));
+	print("Task, RESUMING: ")
+	print('self: ')
+	print(self.params)
 	return coroutine.resume(self.routine, unpack(self.params));
 end
 

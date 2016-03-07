@@ -106,7 +106,7 @@ function Scheduler.step(self)
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
-		--print("Scheduler.step: NO TASK")
+		-- print("Scheduler.step: NO TASK")
 		return true
 	end
 
@@ -131,9 +131,16 @@ function Scheduler.step(self)
 	-- run, and it should be set as the currentFiber, and its coroutine
 	-- is resumed.
 	self.CurrentFiber = task;
-	local results = {task:resume()};
-  print('task priority(in sched): ')
+
+			  print('task priority(in sched): ')
   print(task.priority)
+
+	local results = {task:resume()}; -- *****
+
+	print('results: ')
+	print(results	)
+  -- print('task priority(in sched): ')
+  -- print(task.priority)
 	-- if not task.priority then
 	-- 	-- wait for signal
 	-- 	local newTime = -- time 3 seconds from now
