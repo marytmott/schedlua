@@ -76,9 +76,6 @@ function Scheduler.scheduleTask(self, task, params)
 		return false, "no task specified"
 	end
 
-	print('task priority(in sched): ')
-  print(task.priority)
-
 	task:setParams(params);
 	self.TasksReadyToRun:enqueue(task);
 	task.state = "readytorun"
@@ -135,8 +132,8 @@ function Scheduler.step(self)
 	-- is resumed.
 	self.CurrentFiber = task;
 	local results = {task:resume()};
-  -- print('task priority(in sched): ')
-  -- print(task.priority)
+  print('task priority(in sched): ')
+  print(task.priority)
 	-- if not task.priority then
 	-- 	-- wait for signal
 	-- 	local newTime = -- time 3 seconds from now

@@ -17,11 +17,6 @@ local function task2()
 	end
 end
 
-local function main()
-	local t1 = spawn(task1, true)
-	-- local t2 = spawn(task2, false)
 
-
-end
-
-main()
+run(task1, true)
+-- run(task2, false)
