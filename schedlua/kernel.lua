@@ -20,7 +20,7 @@ setmetatable(Kernel, {
     __call = function(self, params)
     	params = params or {}
     	params.Scheduler = params.Scheduler or self.Scheduler
-    	
+
     	if not params.keeplocal then
     		self:globalize();
     	end
@@ -32,23 +32,24 @@ setmetatable(Kernel, {
 })
 
 function Kernel.getNewTaskID(self)
-	self.TaskID = self.TaskID + 1;
-	return self.TaskID;
+	self.TaskID = self.TaskID + 1
+	return self.TaskID
 end
 
 function Kernel.getCurrentTaskID(self)
-	return self:getCurrentTask().TaskID;
+	return self.TaskID;
 end
 
 function Kernel.getCurrentTask(self)
 	return self.Scheduler:getCurrentTask();
 end
 
-function Kernel.spawn(self, func, ...)
+function Kernel.spawn(self, func, priority, ...)
 	local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
+  task.priority = priority
 	self.Scheduler:scheduleTask(task, {...});
-	
+
 	return task;
 end
 
@@ -132,7 +133,7 @@ function Kernel.run(self, func, ...)
 	end
 
 	while (self.ContinueRunning) do
-		self.Scheduler:step();		
+		self.Scheduler:step();
 	end
 end
 
@@ -142,19 +143,19 @@ end
 
 function Kernel.globalize()
 	halt = Functor(Kernel.halt, Kernel);
-    onSignal = Functor(Kernel.onSignal, Kernel);
+  onSignal = Functor(Kernel.onSignal, Kernel);
 
-    run = Functor(Kernel.run, Kernel);
+  run = Functor(Kernel.run, Kernel);
 
-    signalAll = Functor(Kernel.signalAll, Kernel);
-    signalOne = Functor(Kernel.signalOne, Kernel);
+  signalAll = Functor(Kernel.signalAll, Kernel);
+  signalOne = Functor(Kernel.signalOne, Kernel);
 
-    spawn = Functor(Kernel.spawn, Kernel);
-    suspend = Functor(Kernel.suspend, Kernel);
+  spawn = Functor(Kernel.spawn, Kernel);
+  suspend = Functor(Kernel.suspend, Kernel);
 
-    waitForSignal = Functor(Kernel.waitForSignal, Kernel);
+  waitForSignal = Functor(Kernel.waitForSignal, Kernel);
 
-    yield = Functor(Kernel.yield, Kernel);
+  yield = Functor(Kernel.yield, Kernel);
 end
 
 

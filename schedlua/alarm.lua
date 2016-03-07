@@ -45,7 +45,8 @@ end
 function Alarm.waitUntilTime(self, atime)
 	-- create a signal
 	local taskID = self.Kernel:getCurrentTaskID();
-	local signalName = "sleep-"..tostring(taskID);
+	-- local signalName = "sleep-"..tostring(taskID);
+	local signalName = 'step'
 	local fiber = {DueTime = atime, SignalName = signalName};
 
 	-- put time/signal into list so watchdog will pick it up

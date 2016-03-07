@@ -1,5 +1,3 @@
--- added *priority* logic to this code
-
 --[[
 	Fiber, contains stuff related to a running fiber
 --]]
@@ -15,7 +13,7 @@ local Task_mt = {
 	__index = Task,
 }
 
-function Task.init(self, aroutine, priority, ...)
+function Task.init(self, aroutine, ...)
 
 	local obj = {
 		routine = coroutine.create(aroutine),
@@ -27,18 +25,13 @@ function Task.init(self, aroutine, priority, ...)
 	return obj
 end
 
-function Task.create(self, aroutine, priority, ...)
+function Task.create(self, aroutine, ...)
 	-- The 'aroutine' should be something that is callable
 	-- either a function, or a table with a meta '__call'
 	-- implementation.  Checking with type == 'function'
 	-- is not good enough as it will miss the meta __call cases
 
-	-- local priority = true and priority or 2
-	if not priority then
-		local priority = false
-	end
-
-	return self:init(aroutine, priority...)
+	return self:init(aroutine, ...)
 end
 
 

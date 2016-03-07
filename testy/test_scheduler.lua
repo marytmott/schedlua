@@ -1,8 +1,8 @@
 --test_scheduler.lua
 package.path = package.path..";../?.lua"
 
-Scheduler = require("schedlua.scheduler")()
-Task = require("schedlua.task")
+local Scheduler = require("schedlua.scheduler")()
+local Task = require("schedlua.task")
 local taskID = 0;
 
 local function getNewTaskID()
@@ -14,7 +14,7 @@ local function spawn(scheduler, func, ...)
 	local task = Task(func, ...)
 	task.TaskID = getNewTaskID();
 	scheduler:scheduleTask(task, {...});
-	
+
 	return task;
 end
 

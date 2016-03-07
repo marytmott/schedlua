@@ -10,7 +10,7 @@ local Task = require("schedlua.task");
 -- local tabutils = require("schedlua.tabutils")
 -- local Clock = require("schedlua.clock")
 local Kernel = require("schedlua.kernel")()
-local Alarm = require("schedlua.alarm")
+local Alarm = require("schedlua.alarm")(Kernel, true)
 
 --[[
 	The Scheduler supports a collaborative processing
@@ -68,6 +68,7 @@ end
 -- The 'params' is a table of parameters which will be passed to the function
 -- when it's ready to run.
 function Scheduler.scheduleTask(self, task, params)
+
 	--print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 
@@ -81,8 +82,6 @@ function Scheduler.scheduleTask(self, task, params)
 
 	return task;
 end
-
-
 
 function Scheduler.removeFiber(self, fiber)
 	--print("REMOVING DEAD FIBER: ", fiber);
@@ -104,6 +103,7 @@ end
 function Scheduler.step(self)
 	-- Now check the regular fibers
 	local task = self.TasksReadyToRun:dequeue()
+	print('priority'..task.priority)
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
@@ -133,6 +133,21 @@ function Scheduler.step(self)
 	-- is resumed.
 	self.CurrentFiber = task;
 	local results = {task:resume()};
+	-- print(task.priority)
+
+	-- if not task.priority then
+	-- 	-- wait for signal
+	-- 	local newTime = -- time 3 seconds from now
+	-- 	Alarm:waitUntilTime(30)
+	-- 	Kernel:onSignal()
+	-- 	alarm, clock length, pause
+	-- 	kernel.onSignal, step
+	-- 	yield
+	-- else
+	-- 	-- time 4 seconds from now
+	-- 	alarm, clock length, pause
+	-- 	yield
+	-- end
 
 	-- once we get results back from the resume, one
 	-- of two things could have happened.
