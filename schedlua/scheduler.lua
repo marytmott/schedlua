@@ -9,8 +9,8 @@ local Task = require("schedlua.task");
 -- local Functor = require("schedlua.functor")
 -- local tabutils = require("schedlua.tabutils")
 -- local Clock = require("schedlua.clock")
-local Kernel = require("schedlua.kernel")()
-local Alarm = require("schedlua.alarm")(Kernel, true)
+-- local Kernel = require("schedlua.kernel")()
+-- local Alarm = require("schedlua.alarm")(Kernel, true)
 
 --[[
 	The Scheduler supports a collaborative processing
@@ -76,6 +76,9 @@ function Scheduler.scheduleTask(self, task, params)
 		return false, "no task specified"
 	end
 
+	print('task priority(in sched): ')
+  print(task.priority)
+
 	task:setParams(params);
 	self.TasksReadyToRun:enqueue(task);
 	task.state = "readytorun"
@@ -103,7 +106,6 @@ end
 function Scheduler.step(self)
 	-- Now check the regular fibers
 	local task = self.TasksReadyToRun:dequeue()
-	print('priority'..task.priority)
 
 	-- If no fiber in ready queue, then just return
 	if task == nil then
@@ -133,8 +135,8 @@ function Scheduler.step(self)
 	-- is resumed.
 	self.CurrentFiber = task;
 	local results = {task:resume()};
-	-- print(task.priority)
-
+  -- print('task priority(in sched): ')
+  -- print(task.priority)
 	-- if not task.priority then
 	-- 	-- wait for signal
 	-- 	local newTime = -- time 3 seconds from now

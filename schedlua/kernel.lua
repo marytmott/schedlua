@@ -2,7 +2,7 @@
 -- kernel is a singleton, so return
 -- single instance if we've already been
 -- through this code
---print("== KERNEL INCLUDED ==")
+print("== KERNEL INCLUDED ==")
 
 local Scheduler = require("schedlua.scheduler")
 local Task = require("schedlua.task")
@@ -45,9 +45,16 @@ function Kernel.getCurrentTask(self)
 end
 
 function Kernel.spawn(self, func, priority, ...)
-	local task = Task(func, ...)
+  print('priority: ')
+  print(priority)
+  local task = Task(func, ...)
 	task.TaskID = self:getNewTaskID();
   task.priority = priority
+  print('task id (in kernel): ')
+  print(task.TaskID)
+  print('task priority (in kernel): ')
+  print(task.priority)
+
 	self.Scheduler:scheduleTask(task, {...});
 
 	return task;
